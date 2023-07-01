@@ -21,26 +21,13 @@ export default async function watchEmail(
 
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - 7);    
-    const startDateString = startDate.toISOString();
-    const startHistoryId = '1';
-    const historyTypes = ['messageAdded'];
 
     const userId = "me";
-    const url = `https://gmail.googleapis.com/gmail/v1/users/${userId}/history`;
-    const queryParam = `after:${startDateString}`;
-
 
     const headers = {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     };
-    // Get the current history ID
-    // const historyResponse = await axios.get(url, { headers, params: {
-    //   historyTypes: historyTypes.join(','),
-    // } });
-
-    // console.log({historyResponse})
-    // const currentHistoryId = historyResponse.data.historyId;
 
     // Define the watch request parameters
     const request = {
