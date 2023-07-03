@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_SECRET,
       authorization: {
         params: {
-          scope: 'https://www.googleapis.com/auth/gmail.readonly email',
+          scope: 'https://www.googleapis.com/auth/gmail.readonly email https://www.googleapis.com/auth/calendar',
           access_type: 'offline'
         },
       },
