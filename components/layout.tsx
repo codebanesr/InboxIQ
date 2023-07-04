@@ -5,9 +5,11 @@ import type { ReactNode } from "react";
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Header />
-      <main className="flex-grow p-4">{children}</main>
-      <Footer />
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow p-4">{children}</main>
+        <Footer />
+      </div>
     </>
   );
 }
