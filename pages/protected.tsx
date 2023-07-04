@@ -4,6 +4,7 @@ import Layout from "../components/layout";
 import AccessDenied from "../components/access-denied";
 import Sidebar from "../components/sidebar";
 import BotCreationComponent from "../components/create-bot";
+import ConversationThread from "../components/conversation-thread";
 
 export default function ProtectedPage() {
   const { data: session } = useSession();
@@ -39,6 +40,9 @@ export default function ProtectedPage() {
         </div>
         <div className="w-3/4">
           <BotCreationComponent />
+        </div>
+        <div className="w-2/4">
+          <ConversationThread />
         </div>
       </div>
     </Layout>
