@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex items-center">
           <p className="text-sm mr-2">Liked this chatbot?</p>
           <a
-            href="https://github.com/shanurrahman/next-google-rest-auth"
+            href="https://github.com/shanurrahman/InboxIQ"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-gray-400 flex items-center"
