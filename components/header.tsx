@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import styles from "./header.module.css";
 
 function handleWatcherClick(event: any) {
   event.preventDefault();
@@ -27,24 +26,15 @@ export default function Header() {
   const loading = status === "loading";
 
   return (
-    <header>
-      <noscript>
-        <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
-      </noscript>
-      <div className={styles.signedInStatus}>
-        <p
-          className={`nojs-show ${
-            !session && loading ? styles.loading : styles.loaded
-          }`}
-        >
+    <header className="py-4">
+      <div className="flex items-center justify-between">
+        <p className="nojs-show text-gray-900">
           {!session && (
             <>
-              <span className={styles.notSignedInText}>
-                You are not signed in
-              </span>
+              <span className="text-sm">You are not signed in</span>
               <a
                 href={`/api/auth/signin`}
-                className={styles.buttonPrimary}
+                className="px-4 py-2 ml-4 font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600"
                 onClick={(e) => {
                   e.preventDefault();
                   signIn();
@@ -56,20 +46,24 @@ export default function Header() {
           )}
           {session?.user && (
             <>
-              {session.user.image && (
-                <span
-                  style={{ backgroundImage: `url('${session.user.image}')` }}
-                  className={styles.avatar}
-                />
-              )}
-              <span className={styles.signedInText}>
-                <small>Signed in as</small>
-                <br />
-                <strong>{session.user.email ?? session.user.name}</strong>
-              </span>
+              <div className="flex items-center">
+                {session.user.image && (
+                  <img
+                    src={session.user.image}
+                    alt="User Avatar"
+                    className="w-8 h-8 rounded-full"
+                  />
+                )}
+                <div className="ml-4">
+                  <small className="block text-sm">Signed in as</small>
+                  <strong className="block text-lg">
+                    {session.user.email ?? session.user.name}
+                  </strong>
+                </div>
+              </div>
               <a
                 href={`/api/auth/signout`}
-                className={styles.button}
+                className="px-4 py-2 ml-4 font-medium text-gray-800 bg-gray-200 rounded-md hover:bg-gray-300"
                 onClick={(e) => {
                   e.preventDefault();
                   signOut();
@@ -81,36 +75,17 @@ export default function Header() {
           )}
         </p>
       </div>
-      <nav>
-        <ul className={styles.navItems}>
-          <li className={styles.navItem}>
-            <Link href="/">Home</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/client">Client</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/server">Server</Link>
-          </li>
-          <li className={styles.navItem}>
+
+      <nav className="mt-4">
+        <ul className="flex space-x-4">
+          <li>
             <Link href="/protected">Protected</Link>
           </li>
-          <li className={styles.navItem}>
-            <Link href="/api-example">API</Link>
+          <li>
+            <a href="#" onClick={handleWatcherClick}>
+              Watcher
+            </a>
           </li>
-          <li className={styles.navItem}>
-            <Link href="/admin">Admin</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/me">Me</Link>
-          </li>
-          <ul className={styles.nav}>
-            <li className={styles.navItem}>
-              <a href="#" onClick={handleWatcherClick}>
-                Watcher
-              </a>
-            </li>
-          </ul>
         </ul>
       </nav>
     </header>
