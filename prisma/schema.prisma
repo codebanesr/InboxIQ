@@ -17,3 +17,20 @@ model User {
   @@unique([accessToken, refreshToken])
 }
 
+model Agent {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  settings  Json
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  agent     Agent    @relation(fields: [agentId], references: [id])
+  agentId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
